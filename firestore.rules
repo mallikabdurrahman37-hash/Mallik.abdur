@@ -1,0 +1,32 @@
+rules_version = '2';
+
+// Deploy with: firebase deploy --only firestore:rules
+// (or paste into Firebase Console → Firestore Database → Rules)
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+        request.auth.token.email == "mallikabdurrahman37@gmail.com";
+    }
+
+    // projects: anyone can read (public collection/gallery),
+    // only the admin account can create, update, or delete.
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // users: a signed-in user may read/write only their own profile doc.
+    // the admin can read every profile (useful for future management views).
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if isSignedIn() && request.auth.uid == uid;
+    }
+  }
+}

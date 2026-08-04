@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account — mallik.abdur</title>
+<meta name="description" content="Sign in or create an account on mallik.abdur.">
+<link rel="icon" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="main.css">
+</head>
+<body data-auth-page>
+<div class="page-backdrop"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand"><img src="logo.png" alt=""> mallik.abdur</a>
+    <nav class="nav">
+      <a href="index.html" data-page="index.html">Home</a>
+      <a href="collection.html" data-page="collection.html">Collection</a>
+      <a href="about.html" data-page="about.html">About</a>
+      <a href="auth.html" data-page="auth.html">Account</a>
+      <a href="admin.html" data-page="admin.html" class="nav-admin-link">Admin</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="auth-wrap">
+  <div class="auth-card card glass-strong">
+    <div class="auth-mark">
+      <img src="logo.png" alt="">
+      <span>mallik.abdur</span>
+    </div>
+
+    <!-- Signed-out: login / register -->
+    <div id="auth-forms-view">
+      <div class="auth-tabs">
+        <button id="tab-login" class="active" type="button">Sign in</button>
+        <button id="tab-register" type="button">Register</button>
+      </div>
+
+      <form id="form-login" class="auth-form active">
+        <div class="field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary auth-submit">Sign in</button>
+        <div class="auth-alt">
+          <button type="button" id="forgot-password-btn">Forgot password?</button>
+        </div>
+      </form>
+
+      <form id="form-register" class="auth-form">
+        <div class="field">
+          <label for="register-name">Name</label>
+          <input type="text" id="register-name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="register-email">Email</label>
+          <input type="email" id="register-email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="register-password">Password</label>
+          <input type="password" id="register-password" required minlength="6" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn-primary auth-submit">Create account</button>
+        <div class="auth-alt">
+          Already have an account?
+          <button type="button" data-switch-tab="login">Sign in</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Signed-in status -->
+    <div id="auth-status-view" class="auth-status" style="display:none;">
+      <div class="avatar" id="status-avatar">?</div>
+      <div class="email" id="status-email"></div>
+      <span class="role-pill" id="status-role"></span>
+      <div class="auth-status-actions">
+        <a href="admin.html" id="status-admin-btn" class="btn btn-bronze" style="display:none;">Go to admin</a>
+        <a href="collection.html" class="btn btn-outline">View collection</a>
+        <button id="logout-btn" class="btn btn-ghost">Sign out</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

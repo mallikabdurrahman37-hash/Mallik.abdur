@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collection — mallik.abdur</title>
+<meta name="description" content="Browse the full collection of apps and websites built by Abdur Rahman Mallik.">
+<link rel="icon" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="page-backdrop"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand"><img src="logo.png" alt=""> mallik.abdur</a>
+    <nav class="nav">
+      <a href="index.html" data-page="index.html">Home</a>
+      <a href="collection.html" data-page="collection.html">Collection</a>
+      <a href="about.html" data-page="about.html">About</a>
+      <a href="auth.html" data-page="auth.html">Account</a>
+      <a href="admin.html" data-page="admin.html" class="nav-admin-link">Admin</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="container">
+  <section class="page-hero">
+    <span class="eyebrow">Selected Work</span>
+    <h1>The Collection</h1>
+    <p>Every app and website I've built, in one place — searchable, filterable, and kept up to date.</p>
+  </section>
+
+  <div class="toolbar glass">
+    <div class="search-field">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="search-input" placeholder="Search projects…" aria-label="Search projects">
+    </div>
+    <select id="category-filter" class="select-field" aria-label="Filter by category">
+      <option value="all">All categories</option>
+    </select>
+    <select id="sort-select" class="select-field" aria-label="Sort projects">
+      <option value="newest">Newest first</option>
+      <option value="oldest">Oldest first</option>
+      <option value="az">Title A–Z</option>
+      <option value="za">Title Z–A</option>
+    </select>
+  </div>
+
+  <div class="gallery-grid" id="gallery-grid"></div>
+
+  <div class="empty-state" id="empty-state" style="display:none;">
+    <h3>Nothing here yet</h3>
+    <p>Check back soon — new work is added regularly.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span class="footer-brand">mallik.abdur</span>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/mallik.abdur?igsh=YXNwdm52OWxydnpz" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://youtube.com/@ayatserenity-t4i?si=5ok6YzqJ8EmMzwir" target="_blank" rel="noopener">YouTube</a>
+      <a href="mailto:mallikabdurrahman37@gmail.com">Email</a>
+    </div>
+    <span class="footer-meta">© 2026 Abdur Rahman Mallik</span>
+  </div>
+</footer>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

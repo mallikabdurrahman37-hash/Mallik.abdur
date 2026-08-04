@@ -1,0 +1,22 @@
+{
+  "name": "mallik.abdur",
+  "short_name": "mallik.abdur",
+  "description": "A personal hub of apps and websites by Abdur Rahman Mallik.",
+  "start_url": "index.html",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#F8F6F2",
+  "theme_color": "#17140F",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

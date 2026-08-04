@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — mallik.abdur</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="main.css">
+</head>
+<body data-admin-page>
+<div class="page-backdrop"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand"><img src="logo.png" alt=""> mallik.abdur</a>
+    <nav class="nav">
+      <a href="index.html" data-page="index.html">Home</a>
+      <a href="collection.html" data-page="collection.html">Collection</a>
+      <a href="about.html" data-page="about.html">About</a>
+      <a href="auth.html" data-page="auth.html">Account</a>
+      <a href="admin.html" data-page="admin.html" class="nav-admin-link visible">Admin</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- Non-admin / signed-out -->
+  <div class="admin-guard" id="admin-guard">
+    <span class="eyebrow" style="justify-content:center;">Restricted</span>
+    <h2 style="margin-top:14px;">This area is for the site administrator.</h2>
+    <p class="text-muted" style="margin-top:8px;">Sign in with the administrator account to manage the collection.</p>
+    <a href="auth.html" class="btn btn-primary" style="margin-top:24px;">Go to sign in</a>
+  </div>
+
+  <!-- Admin dashboard -->
+  <div id="admin-panel-view" style="display:none;">
+    <section class="page-hero">
+      <span class="eyebrow">Dashboard</span>
+      <h1>Admin</h1>
+      <p>Add, edit, and manage everything shown in the collection.</p>
+    </section>
+
+    <div class="admin-layout">
+      <aside class="admin-side card">
+        <div class="who" id="admin-who"></div>
+        <nav class="admin-side-nav">
+          <button class="active" type="button">Projects</button>
+        </nav>
+      </aside>
+
+      <section class="admin-panel card">
+        <div class="admin-panel-head">
+          <h2>Projects</h2>
+          <button id="open-add-project" class="btn btn-primary btn-sm">Add project</button>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <tr id="admin-empty">
+                <td colspan="5" style="text-align:center; padding:40px 12px; color:var(--stone-700);">No projects yet — add your first one.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</main>
+
+<!-- Add / edit project modal -->
+<div class="modal-veil" id="project-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="project-modal-title">Add project</h3>
+      <button class="modal-close" id="project-modal-close" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <form id="project-form">
+      <div class="field">
+        <label>Icon</label>
+        <div class="uploader" id="uploader-box">
+          <img id="uploader-preview" style="display:none;" alt="">
+          <div class="hint" id="uploader-hint">Click to upload a square icon</div>
+          <input type="file" id="uploader-input" accept="image/*" class="sr-only">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-title">Title</label>
+        <input type="text" id="f-title" required>
+      </div>
+      <div class="field">
+        <label for="f-description">Description</label>
+        <textarea id="f-description" required></textarea>
+      </div>
+      <div class="field">
+        <label for="f-category">Category</label>
+        <input type="text" id="f-category" placeholder="e.g. Web App">
+      </div>
+      <div class="field">
+        <label for="f-url">Project URL</label>
+        <input type="url" id="f-url" placeholder="https://" required>
+      </div>
+      <div class="field">
+        <label for="f-status">Status</label>
+        <select id="f-status" class="field-select">
+          <option value="draft">Draft</option>
+          <option value="live">Live</option>
+        </select>
+      </div>
+      <div class="field" style="display:flex; align-items:center; gap:10px;">
+        <input type="checkbox" id="f-featured" style="width:auto;">
+        <label for="f-featured" style="margin:0;">Mark as featured</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%; margin-top:8px;">Save project</button>
+    </form>
+  </div>
+</div>
+
+<!-- 1:1 image cropper -->
+<div class="crop-veil" id="crop-veil">
+  <div class="crop-box">
+    <h3 style="font-size:16px; margin-bottom:14px;">Crop icon — 1:1</h3>
+    <div class="crop-stage" id="crop-stage">
+      <img id="crop-img" alt="">
+    </div>
+    <div class="crop-controls">
+      <span class="mono" style="font-size:11px; color:var(--stone-700);">Zoom</span>
+      <input type="range" id="crop-zoom" min="1" max="3" step="0.01" value="1">
+    </div>
+    <div class="crop-actions">
+      <button type="button" class="btn btn-outline" id="crop-cancel">Cancel</button>
+      <button type="button" class="btn btn-primary" id="crop-confirm">Use photo</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
